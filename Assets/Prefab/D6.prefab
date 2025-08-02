@@ -102,7 +102,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 1
+  m_text: 3
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: a622db8689df3e348a7dff4046e06063, type: 2}
@@ -188,7 +188,7 @@ GameObject:
   - component: {fileID: 6838030548502580778}
   - component: {fileID: 3581968307592329427}
   m_Layer: 0
-  m_Name: Index5
+  m_Name: Index1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -454,7 +454,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 1
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: a622db8689df3e348a7dff4046e06063, type: 2}
@@ -553,8 +553,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1146442333604802178}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.501}
+  m_LocalRotation: {x: -0.50000006, y: 0.50000024, z: -0.5, w: -0.49999976}
+  m_LocalPosition: {x: 0, y: 0.501, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -587,6 +587,7 @@ GameObject:
   - component: {fileID: 1961153179495307625}
   - component: {fileID: 3738265126463119747}
   - component: {fileID: 3158385146993359820}
+  - component: {fileID: -2407272821946275344}
   m_Layer: 0
   m_Name: D6
   m_TagString: Untagged
@@ -626,13 +627,15 @@ MonoBehaviour:
   meshTransform: {fileID: 1810916431919633621}
   faces:
   - {fileID: 8771772932413673262}
-  - {fileID: 7881012539671614661}
+  - {fileID: 3198216374706040671}
   - {fileID: 6808307897365518854}
   - {fileID: 2554201128091918359}
   - {fileID: 2834907123251438444}
-  - {fileID: 3198216374706040671}
+  - {fileID: 7881012539671614661}
   material: 0
   color: 0
+  recorder: {fileID: 0}
+  doRolls: 1
 --- !u!65 &3738265126463119747
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -652,7 +655,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 0.5, y: 0.5, z: 0.5}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &3158385146993359820
 Rigidbody:
@@ -681,6 +684,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-2407272821946275344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1704442780460610521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e221456b54f8c854bbb982c842a02f2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1936205024418623063
 GameObject:
   m_ObjectHideFlags: 0
@@ -692,7 +707,6 @@ GameObject:
   - component: {fileID: 1810916431919633621}
   - component: {fileID: 2166017930452944532}
   - component: {fileID: 9017534461799702237}
-  - component: {fileID: 1039346050139515398}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -708,17 +722,17 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1936205024418623063}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6128842553001849407}
-  - {fileID: 8521860561168252191}
+  - {fileID: 5339661385381560788}
   - {fileID: 9154955325651742628}
   - {fileID: 91615230638802082}
   - {fileID: 8345224393978040509}
-  - {fileID: 5339661385381560788}
+  - {fileID: 8521860561168252191}
   m_Father: {fileID: 8208632582558055215}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2166017930452944532
@@ -774,18 +788,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &1039346050139515398
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1936205024418623063}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f73eb0c08b0b824bb11c63c7ad7246e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2570265284812633678
 GameObject:
   m_ObjectHideFlags: 0
@@ -797,7 +799,7 @@ GameObject:
   - component: {fileID: 8521860561168252191}
   - component: {fileID: 7881012539671614661}
   m_Layer: 0
-  m_Name: Face1
+  m_Name: Face5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -811,8 +813,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2570265284812633678}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -1, z: -0, w: 0.0000029504295}
-  m_LocalPosition: {x: 0, y: 0, z: 0.501}
+  m_LocalRotation: {x: -0.5000015, y: 0.50000125, z: 0.4999986, w: 0.49999878}
+  m_LocalPosition: {x: 0, y: -0.501, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -845,7 +847,7 @@ GameObject:
   - component: {fileID: 1121814554926978223}
   - component: {fileID: 9179987830171112882}
   m_Layer: 0
-  m_Name: Index1
+  m_Name: Index5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -935,7 +937,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 1
+  m_text: 5
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: a622db8689df3e348a7dff4046e06063, type: 2}
@@ -1111,7 +1113,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 1
+  m_text: 4
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: a622db8689df3e348a7dff4046e06063, type: 2}
@@ -1210,8 +1212,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5844983936789586766}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.70710576, z: -0, w: 0.7071079}
-  m_LocalPosition: {x: 0.501, y: 0, z: 0}
+  m_LocalRotation: {x: -0.7071068, y: 0.7071068, z: -0.0000010430813, w: -0.00000071525574}
+  m_LocalPosition: {x: 0, y: 0, z: 0.501}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1257,8 +1259,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6941397759248478629}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.70710576, z: -0, w: 0.70710784}
-  m_LocalPosition: {x: -0.501, y: 0, z: -0}
+  m_LocalRotation: {x: -0.0000010728836, y: 0.0000014007092, z: -0.7071068, w: -0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: -0.501}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1304,8 +1306,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7902663230702538394}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.70710576, y: -0, z: -0, w: 0.70710784}
-  m_LocalPosition: {x: 0, y: -0.501, z: 0}
+  m_LocalRotation: {x: -0.0000012516975, y: 0.70710695, z: -0.00000086426735, w: -0.70710665}
+  m_LocalPosition: {x: 0.501, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1337,7 +1339,7 @@ GameObject:
   - component: {fileID: 5339661385381560788}
   - component: {fileID: 3198216374706040671}
   m_Layer: 0
-  m_Name: Face5
+  m_Name: Face1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1351,8 +1353,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8229139242664949063}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.0000020862658, y: -0.70710784, z: 0.70710576, w: 0.000002086272}
-  m_LocalPosition: {x: 0, y: 0.501, z: 0}
+  m_LocalRotation: {x: -0.00000086432203, y: 0.70710874, z: 0.0000012516974, w: 0.70710486}
+  m_LocalPosition: {x: -0.501, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1475,7 +1477,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 1
+  m_text: 2
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: a622db8689df3e348a7dff4046e06063, type: 2}

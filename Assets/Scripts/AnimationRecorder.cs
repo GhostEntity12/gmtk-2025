@@ -4,11 +4,6 @@ using UnityEngine;
 
 public class AnimationRecorder : MonoBehaviour
 {
-    public AnimationRecorder(Die d)
-    {
-        die = d;
-    }
-
     /// <summary>
     /// Die to record
     /// </summary>
@@ -17,16 +12,27 @@ public class AnimationRecorder : MonoBehaviour
     /// <summary>
     /// Recording of animation
     /// </summary>
-	private Queue<Frame> recording;
+	private List<Frame> recording = new();
 
     /// <summary>
     /// Stores the playback
     /// </summary>
-    Coroutine playback;
+    Coroutine playback = null;
 
-	public Queue<Frame> Recording => recording;
+    /// <summary>
+    /// Maximum number of frames that can be in the recording.
+    /// Prevents freezes if the die clips out
+    /// </summary>
+    private readonly int maxFrameBuffer = 500;
 
-    public void Record()
+	public List<Frame> Recording => recording;
+
+	private void Start()
+    {
+        die = GetComponent<Die>();
+    }
+
+	public void RecordSimulation()
     {
         // Delete the old recording
         recording.Clear();
@@ -35,54 +41,73 @@ public class AnimationRecorder : MonoBehaviour
         Physics.simulationMode = SimulationMode.Script;
 
         // While die is moving
-        while (!die.IsStopped())
+        while (!die.IsStopped() && recording.Count < maxFrameBuffer)
         {
             // Record location and position
-            recording.Enqueue(new(die.transform.position, die.transform.rotation));
+            recording.Add(new(die.transform.position, die.transform.rotation));
             Physics.Simulate(Time.fixedDeltaTime);
-        }
+		}
 
-        // Return to normal simulation mode
-        Physics.simulationMode = SimulationMode.FixedUpdate;
+		// Return to normal simulation mode
+		Physics.simulationMode = SimulationMode.FixedUpdate;
     }
 
-    public void PlayRecording()
+    /// <summary>
+    /// Attempts to play the recorded animation.
+    /// </summary>
+    /// <returns>Whether the animation successfully started.</returns>
+    public bool PlaybackSimulation()
     {
         // Prevents playback if the animation is already playing back or doesn't exist
-        if (playback != null && recording.Count > 0)
-        {
-            playback = StartCoroutine(Playback());
+        if (playback == null && recording.Count > 0)
+		{
+			playback = StartCoroutine(Playback());
+            return true;
         }
+
+        return false;
     }
 
     private IEnumerator Playback()
     {
+        //Debug.Log("Starting playback");
+
+        //float startTime = Time.time;
+
         // Disable physics on the die
         SetPhysicsEnabled(false);
 
         // Replay each stored frame
-        while (recording.Count > 0)
+        for (int i = 0; i < recording.Count; i++)
         {
-            Frame f = recording.Dequeue();
+            //Frame f = recording.Dequeue();
+            Frame f = recording[i];
             die.transform.SetPositionAndRotation(f.position, f.rotation);
             yield return new WaitForFixedUpdate();
         }
 
         // Reenable physics
         SetPhysicsEnabled(true);
+
+        //Debug.Log($"Playback finished after {Time.time - startTime}");
+
         playback = null;
     }
 
-	public void SetPhysicsEnabled(bool enabled)
+	private void SetPhysicsEnabled(bool enabled)
 	{
 		die.Rigidbody.useGravity = enabled;
 		die.Rigidbody.isKinematic = !enabled;
 	}
 
+    /// <summary>
+    /// Stores a single frame of animation
+    /// </summary>
 	public struct Frame
 	{
 		public Vector3 position;
 		public Quaternion rotation;
+        // if audio is needed, needs to be added here
 
 		public Frame(Vector3 position, Quaternion rotation)
 		{
