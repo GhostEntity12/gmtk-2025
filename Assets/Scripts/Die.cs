@@ -13,7 +13,6 @@ public class Die : MonoBehaviour
 	[SerializeField] private ColorModifiers color = ColorModifiers.None;
 
 	private Rigidbody rb;
-	private bool isRolling;
 	public AnimationRecorder recorder;
 
 	public int Sides => faces.Count;
@@ -93,7 +92,6 @@ public class Die : MonoBehaviour
 	public void ApplyPhysics()
 	{
 		//startTime = Time.time;
-		isRolling = true;
 		Vector3 force = new(Random.Range(-5, 5), Random.Range(2, 7), Random.Range(-5, 5));
 		Vector3 torque = new(Random.Range(-25, 25), Random.Range(-25, 25), Random.Range(-25, 25));
 
