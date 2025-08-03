@@ -11,16 +11,13 @@ public class Character : MonoBehaviour
 
 	[SerializeField] Image characterImage;
 	[SerializeField] private Sprite spriteDefault;
-	[SerializeField] private Sprite spriteDamage;
+	[SerializeField] private Sprite spriteDamaged;
 	[SerializeField] AnimationCurve hurtCurve;
 
 	private void Start()
 	{
 		health = maxHealth;
 	}
-
-	[ContextMenu("Test Damage")]
-	void td() => TakeDamage(0);
 
 	public void TakeDamage(int damage)
 	{
@@ -29,7 +26,7 @@ public class Character : MonoBehaviour
 		if ((float)health/maxHealth <= 0.5f)
 		{
 			// character is badly damaged
-			characterImage.sprite = spriteDamage;
+			characterImage.sprite = spriteDamaged;
 		}
 
 		else if (health <= 0)

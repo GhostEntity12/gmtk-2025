@@ -52,11 +52,12 @@ public class AnimationRecorder : MonoBehaviour
 		Physics.simulationMode = SimulationMode.FixedUpdate;
     }
 
-    /// <summary>
-    /// Attempts to play the recorded animation.
-    /// </summary>
-    /// <returns>Whether the animation successfully started.</returns>
-    public bool PlaybackSimulation()
+	/// <summary>
+	/// Attempts to play the recorded animation.
+	/// </summary>
+	/// <returns>Whether the animation successfully started.</returns>
+	[ContextMenu("Replay Roll")]
+	public bool PlaybackSimulation()
     {
         // Prevents playback if the animation is already playing back or doesn't exist
         if (playback == null && recording.Count > 0)
