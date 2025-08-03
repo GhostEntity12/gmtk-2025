@@ -18,7 +18,7 @@ public class ColorModifier
 {
 	public static int Process(Die d, int roll, bool winner)
 	{
-		return d.Color switch
+		return d.DieInfo.Color switch
 		{
 			ColorModifiers.None => roll,
 			ColorModifiers.Red => winner ? roll + 2 : roll,
@@ -34,7 +34,7 @@ public class MaterialModifier
 {
 	public static int Process(Die die, int roll)
 	{
-		return die.Material switch
+		return die.DieInfo.Material switch
 		{
 			MaterialModifiers.None => roll,
 			_ => throw new NotImplementedException(),

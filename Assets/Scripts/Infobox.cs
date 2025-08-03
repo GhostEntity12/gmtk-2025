@@ -32,9 +32,9 @@ public class Infobox : MonoBehaviour
 
 	public void SetDieInfo(Die d)
     {
-        titleTextMesh.text = $"{(d.Material!= Modifiers.MaterialModifiers.None ? d.Material + " ": "")}d{d.Faces.Count}{(d.Color != Modifiers.ColorModifiers.None ? $"with {d.Color} numbers" : "")}";
+        titleTextMesh.text = $"{(d.DieInfo.Material!= Modifiers.MaterialModifiers.None ? d.DieInfo.Material + " ": "")}d{d.Faces.Count}{(d.DieInfo.Color != Modifiers.ColorModifiers.None ? $"with {d.DieInfo.Color} numbers" : "")}";
         string faceString = string.Join(", ", d.Faces.OrderBy(f => f.Value).Select(f => f.Value));
-        detailsTextMesh.text = $"<b>Sides:</b> {faceString}\n<b>{d.Material}:</b>{placeholder}\n<b>{d.Color}:</b>{placeholder}";
+        detailsTextMesh.text = $"<b>Sides:</b> {faceString}\n<b>{d.DieInfo.Material}:</b>{placeholder}\n<b>{d.DieInfo.Color}:</b>{placeholder}";
     }
 
     public void Hide()
