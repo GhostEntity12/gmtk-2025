@@ -8,8 +8,6 @@ public class RollManager : MonoBehaviour
 	[SerializeField] private Character enemy;
 	private Die enemyDie;
 
-	[SerializeField] bool doRotate = true;
-
 	public void SetPlayerDie(Die die) => playerDie = die;
 	public void SetEnemyDie(Die die) => enemyDie = die;
 
