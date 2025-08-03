@@ -7,9 +7,6 @@ public class RollManager : MonoBehaviour
 
 	[SerializeField] private Character enemy;
 	private Die enemyDie;
-	[SerializeField] int tfi;
-
-	[SerializeField] bool doRotate = true;
 
 	public void SetPlayerDie(Die die) => playerDie = die;
 	public void SetEnemyDie(Die die) => enemyDie = die;
@@ -22,17 +19,8 @@ public class RollManager : MonoBehaviour
 	[ContextMenu("Roll")]
 	public void Roll()
 	{
-		// Record an animation for both dice
-		playerDie.ApplyPhysics();
-		playerDie.Recorder.RecordSimulation();
-		DieFace topFace = playerDie.GetTopFace();
-		if (doRotate)
-		{
-			int targetFaceIndex = tfi;// Random.Range(0, playerDie.Faces.Count);
-			Debug.Log($"Rolled {topFace.Value}. Cheating Roll to {playerDie.Faces[targetFaceIndex].Value}");
-			playerDie.TransformToTarget(playerDie.Faces.IndexOf(topFace), targetFaceIndex);
-		}
-		playerDie.Recorder.PlaybackSimulation();
+		RollAndRecord(playerDie, true);
+		RollAndRecord(enemyDie, true);
 
 		//int playerRoll = playerDie.Roll();
 		//int enemyRoll = enemyDie.Roll();
@@ -60,6 +48,13 @@ public class RollManager : MonoBehaviour
 	}
 
 	[ContextMenu("Roll")]
+	public void RollAndRecord(Die d)
+	{
+		d.ApplyPhysics();
+		d.Recorder.RecordSimulation();
+		d.Recorder.PlaybackSimulation();
+	}
+
 	public void RollAndRecord(Die d, int? targetFace = null)
 	{
 		d.ApplyPhysics();
@@ -75,9 +70,20 @@ public class RollManager : MonoBehaviour
 		d.Recorder.PlaybackSimulation();
 	}
 
-	[ContextMenu("Replay Roll")]
-	void ReplayRoll()
+	public void RollAndRecord(Die d, bool doRandom)
 	{
-		playerDie.recorder.PlaybackSimulation();
+		if (!doRandom)
+		{
+			RollAndRecord(d);
+			return;
+		}
+
+		d.ApplyPhysics();
+		d.Recorder.RecordSimulation();
+		int targetFaceIndex = Random.Range(0, d.Faces.Count);
+		//Debug.Log($"Rolled {d.GetTopFace().Value}. Cheating Roll to {d.Faces[targetFaceIndex].Value}");
+		d.TransformToTarget(d.Faces.IndexOf(d.GetTopFace()), targetFaceIndex);
+
+		d.Recorder.PlaybackSimulation();
 	}
 }

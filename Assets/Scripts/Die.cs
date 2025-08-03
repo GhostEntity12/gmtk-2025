@@ -5,26 +5,22 @@ using System.Linq;
 
 public class Die : MonoBehaviour
 {
-	[SerializeField] private List<int> defaultFaces;
+	public enum DieType
+	{
+		D6, D8
+	}
+
+	[SerializeField] private DieInfo dieInfo;
+	[SerializeField] private List<DieFace> faces;
 	[SerializeField] private Transform meshTransform;
 
-	[SerializeField] private List<DieFace> faces;
-	[SerializeField] private MaterialModifiers material = MaterialModifiers.None;
-	[SerializeField] private ColorModifiers color = ColorModifiers.None;
-
 	private Rigidbody rb;
-	private bool isRolling;
-	public AnimationRecorder recorder;
+	private AnimationRecorder recorder;
 
-	public int Sides => faces.Count;
+
+	public DieInfo DieInfo => dieInfo;
 	public List<DieFace> Faces => faces;
-
-	public MaterialModifiers Material => material;
-	public ColorModifiers Color => color;
-
-	public void ApplyMaterial(MaterialModifiers mat) => material = mat;
-	public void ApplyColor(ColorModifiers col) => color = col;
-
+	public int Sides => faces.Count;
 	public Rigidbody Rigidbody => rb;
 	public AnimationRecorder Recorder => recorder;
 
@@ -34,19 +30,16 @@ public class Die : MonoBehaviour
 
 	private void Start()
 	{
-		if (defaultFaces.Count > 0)
-		{
-			SetFaces(defaultFaces.ToArray());
-		}
-		else
-		{
-			SetFaces(1, 2, 3, 4, 5, 6);
-		}
+		SetData(new DieInfo(DieType.D6, new int[]{ 1, 2, 3, 4, 5, 6 }));
+	}
 
-		rb = GetComponent<Rigidbody>();
-		recorder = GetComponent<AnimationRecorder>();
-
-		//ApplyPhysics();
+	public void SetData(DieInfo d)
+	{
+		dieInfo = d;
+		for (int i = 0; i < faces.Count; i++)
+		{
+			faces[i].SetValue(dieInfo.FaceValues[i]);
+		}
 	}
 
 	public void SetFaces(params int[] faceValues)
@@ -93,7 +86,6 @@ public class Die : MonoBehaviour
 	public void ApplyPhysics()
 	{
 		//startTime = Time.time;
-		isRolling = true;
 		Vector3 force = new(Random.Range(-5, 5), Random.Range(2, 7), Random.Range(-5, 5));
 		Vector3 torque = new(Random.Range(-25, 25), Random.Range(-25, 25), Random.Range(-25, 25));
 
@@ -137,4 +129,49 @@ public readonly struct Transformations
 		{ new(000, 090, 000), new(000, 270, 180), new(000, 270, 000), new(000, 090, 180), new(000, 180, 000), new(000, 000, 180), new(000, 000, 000), new(000, 180, 180), },
 		{ new(000, 090, 180), new(000, 270, 000), new(000, 270, 180), new(000, 090, 000), new(000, 000, 180), new(000, 180, 000), new(000, 180, 180), new(000, 000, 000), },
 	};
+}
+
+public struct DieInfo
+{
+	Die.DieType type;
+	[SerializeField] private int[] faceValues;
+	[SerializeField] private MaterialModifiers material;
+	[SerializeField] private ColorModifiers color;
+
+	public readonly Die.DieType Type => type;
+	public readonly MaterialModifiers Material => material;
+	public readonly ColorModifiers Color => color;
+	public readonly int[] FaceValues => faceValues;
+
+	public void ApplyMaterial(MaterialModifiers mat) => material = mat;
+	public void ApplyColor(ColorModifiers col) => color = col;
+	public void SetFaceValues(params int[] values) => faceValues = values;
+
+	public DieInfo(Die.DieType dieType, int[] values, MaterialModifiers mat = MaterialModifiers.None, ColorModifiers col = ColorModifiers.None)
+	{
+		type = dieType;
+		bool sideTypeMatch = dieType switch
+		{
+			Die.DieType.D6 => values.Length == 6,
+			Die.DieType.D8 => values.Length == 8,
+			_ => throw new System.ArgumentException("Faces and die type don't match"),
+		};
+
+		if (!sideTypeMatch)
+		{
+			throw new System.ArgumentException("Faces and die type don't match");
+		}
+
+		faceValues = values;
+		material = mat;
+		color = col;
+	}
+
+	public DieInfo(DieInfo d)
+	{
+		type = d.type;
+		faceValues = d.faceValues;
+		material = d.material;
+		color = d.color;
+	}
 }
