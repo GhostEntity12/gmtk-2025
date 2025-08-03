@@ -4,24 +4,35 @@ using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI textMesh;
-    [SerializeField] private Image fillImage;
-    private int maxHealth;
-    private float targetFillEnd;
-    private float targetFillStart;
+	[SerializeField] private TextMeshProUGUI textMesh;
+	[SerializeField] private Image fillImage;
+	private int maxHealth;
+	private float targetFillEnd;
+	private float targetFillStart;
+	private float speed = 12f;
+	private float time = 1;
 
-    private void Update()
+	private void Update()
 	{
-        fillImage.fillAmount = Mathf.Lerp(targetFillStart, targetFillEnd, 30f);
+		if (time < 1)
+		{
+			fillImage.fillAmount = Mathf.Lerp(targetFillStart, targetFillEnd, time);
+			time += speed * Time.deltaTime;
+		}
 	}
 
-	public void SetMaxHealth(int maxHealth) => this.maxHealth = maxHealth;
+	public void SetInitialValue(int health)
+	{
+		maxHealth = health;
+		textMesh.text = health.ToString();
+		fillImage.fillAmount = 1;
+	}
 
-	// Start is called once before the first execution of Update after the MonoBehaviour is created
 	public void SetValue(int health)
-    {
-        textMesh.text = health.ToString();
-        targetFillStart = fillImage.fillAmount;
-        targetFillEnd = (float)health / maxHealth;
+	{
+		textMesh.text = health.ToString();
+		targetFillStart = fillImage.fillAmount;
+		targetFillEnd = (float)health / maxHealth;
+		time = 0;
 	}
 }

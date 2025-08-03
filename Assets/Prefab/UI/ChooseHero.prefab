@@ -134,7 +134,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -286,6 +286,7 @@ GameObject:
   - component: {fileID: 701091979356401037}
   - component: {fileID: 8251091147554577010}
   - component: {fileID: 7206475387652016038}
+  - component: {fileID: 5192775154531098684}
   m_Layer: 5
   m_Name: ButtonMasc
   m_TagString: Untagged
@@ -394,7 +395,32 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8251091147554577010}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3128727527833404016}
+        m_TargetAssemblyTypeName: CharacterPicker, Assembly-CSharp
+        m_MethodName: ChooseHero
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 5192775154531098684}
+          m_ObjectArgumentAssemblyTypeName: CharacterPickChoice, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &5192775154531098684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3906354183775025643}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a351d1159b02edb45934346614b70a65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bodyType: 0
 --- !u!1 &4150756384397834000
 GameObject:
   m_ObjectHideFlags: 0
@@ -407,6 +433,7 @@ GameObject:
   - component: {fileID: 1317886463493912751}
   - component: {fileID: 4959688895344716763}
   - component: {fileID: 1253820866273847596}
+  - component: {fileID: 964210723220250711}
   m_Layer: 5
   m_Name: ButtonFem
   m_TagString: Untagged
@@ -515,7 +542,32 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4959688895344716763}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3128727527833404016}
+        m_TargetAssemblyTypeName: CharacterPicker, Assembly-CSharp
+        m_MethodName: ChooseHero
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 964210723220250711}
+          m_ObjectArgumentAssemblyTypeName: CharacterPickChoice, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &964210723220250711
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4150756384397834000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a351d1159b02edb45934346614b70a65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bodyType: 1
 --- !u!1 &4516455658446224507
 GameObject:
   m_ObjectHideFlags: 0
@@ -546,10 +598,10 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1753227792391285920}
   - {fileID: 4700771543134301087}
   - {fileID: 8549973964899607254}
   - {fileID: 2984398498465405257}
-  - {fileID: 1753227792391285920}
   m_Father: {fileID: 8012864784492556187}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -607,7 +659,7 @@ GameObject:
   - component: {fileID: 6526107269037733583}
   - component: {fileID: 4378895363511446325}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: TitleText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -630,7 +682,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 287}
-  m_SizeDelta: {x: 569.3, y: 100.7}
+  m_SizeDelta: {x: 569.3, y: 123.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6526107269037733583
 CanvasRenderer:
@@ -662,8 +714,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Choose your Hero!
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: f0f83678405899c4db74e2800e6a8161, type: 2}
+  m_sharedMaterial: {fileID: 3085083549080807011, guid: f0f83678405899c4db74e2800e6a8161, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -687,12 +739,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 67.4
+  m_fontSize: 83.5
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_fontSizeMax: 1000
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512

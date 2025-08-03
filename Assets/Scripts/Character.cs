@@ -4,35 +4,48 @@ using UnityEngine.UI;
 
 public class Character : MonoBehaviour
 {
-	[SerializeField] private int maxHealth = 5;
-	[SerializeField] private int health;
+	[SerializeField] private int maxHealth = 10;
+	[SerializeField] private int curHealth;
 
-	[SerializeField] private List<Die> dice;
+	[SerializeField] private List<DieInfo> dice;
 
 	[SerializeField] Image characterImage;
-	[SerializeField] private Sprite spriteDefault;
-	[SerializeField] private Sprite spriteDamaged;
-	[SerializeField] AnimationCurve hurtCurve;
+	[SerializeField] private SpritePack sprites;
+	[SerializeField] private AnimationCurve hurtCurve;
+	[SerializeField] private HealthBar healthBar;
+	[SerializeField] private DieSelectButton[] selectors;
 
-	private void Start()
+	public List<DieInfo> Dice => dice;
+
+	public bool IsDead => curHealth <= 0;
+
+	public void Setup(List<DieInfo> dice, SpritePack spritePack, int health)
 	{
-		health = maxHealth;
+		this.dice = dice;
+		for (int i = 0; i < selectors.Length; i++)
+		{
+			selectors[i].SetInfo(dice[i]);
+		}
+
+		sprites = spritePack;
+		characterImage.sprite = sprites.attacking;
+
+		maxHealth = health;
+		curHealth = health;
+		healthBar.SetInitialValue(maxHealth);
 	}
 
 	public void TakeDamage(int damage)
 	{
-		health -= damage;
+		curHealth = Mathf.Max(0, curHealth - damage);
 
-		if ((float)health/maxHealth <= 0.5f)
+		if ((float)curHealth/maxHealth <= 0.5f)
 		{
 			// character is badly damaged
-			characterImage.sprite = spriteDamaged;
+			characterImage.sprite = sprites.damaged;
 		}
 
-		else if (health <= 0)
-		{
-			// character is dead
-		}
 		LeanTween.color(characterImage.rectTransform, Color.red, 0.5f).setEase(hurtCurve);
+		healthBar.SetValue(curHealth);
 	}
 }

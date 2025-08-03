@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -26,6 +27,8 @@ public class AnimationRecorder : MonoBehaviour
     private readonly int maxFrameBuffer = 500;
 
 	public List<Frame> Recording => recording;
+
+    public event Action OnPlaybackFinished;
 
 	private void Start()
     {
@@ -91,6 +94,8 @@ public class AnimationRecorder : MonoBehaviour
         SetPhysicsEnabled(true);
 
         //Debug.Log($"Playback finished after {Time.time - startTime}");
+
+        OnPlaybackFinished?.Invoke();
 
         playback = null;
     }

@@ -7,7 +7,7 @@ public class Die : MonoBehaviour
 {
 	public enum DieType
 	{
-		D6, D8
+		D6 = 6, D8 = 8
 	}
 
 	[SerializeField] private DieInfo dieInfo;
@@ -28,9 +28,10 @@ public class Die : MonoBehaviour
 	//float startTime;
 	//[SerializeField] bool doRolls = true;
 
-	private void Start()
+	private void Awake()
 	{
-		SetData(new DieInfo(DieType.D6, new int[]{ 1, 2, 3, 4, 5, 6 }));
+		rb = GetComponent<Rigidbody>();
+		recorder = GetComponent<AnimationRecorder>();
 	}
 
 	public void SetData(DieInfo d)
@@ -102,6 +103,7 @@ public class Die : MonoBehaviour
 
 public readonly struct Transformations
 {
+	// Values here are off
 	//public static readonly Vector3[,] d4 =
 	//{
 	//	{ new(000.00f, 000.00f, 000.00f), new(331.87f, 019.11f, 112.21f), new(070.53f, 240.00f, 180.00f), new(331.87f, 220.89f, 247.79f), },
@@ -131,6 +133,7 @@ public readonly struct Transformations
 	};
 }
 
+[System.Serializable]
 public struct DieInfo
 {
 	Die.DieType type;
